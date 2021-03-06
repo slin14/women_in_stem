@@ -9,6 +9,7 @@ First, clone this project.
 Then, in your console, run `pip install -r requirements.txt`
 
 Then type in the console `export FLASK_APP=app.py`.
+On Windows use `set` instead of `export`
 
 ## Running the project
 
