@@ -30,7 +30,7 @@ def get_achievements():
     query = ach_ref
 
     if id is not None:
-        return jsonify(ach_ref.document(id).get().to_dict()), 200
+        return get_achievements_by_id(id)
 
     if name is not None:
         query = query.where("name", "array_contains", name.lower().title())
@@ -54,6 +54,15 @@ def get_achievements():
         result[u'name'] = result[u'name'][0]
 
     return jsonify(results), 200
+
+@app.route("/achievements/<id>", methods=["GET"])
+def get_achievements_by_id(id):
+    doc = ach_ref.document(id).get().to_dict()
+
+    if doc is None:
+        return jsonify(error=400, message="No achievement exists with that id"), 400
+    else:
+        return jsonify(doc), 200
     
 
 port = int(os.environ.get('PORT', 8080))
