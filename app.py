@@ -31,7 +31,7 @@ def get_achievements():
         return jsonify(ach_ref.document(id).get().to_dict()), 200
 
     if name is not None:
-        query = query.where("name", "==", name)
+        query = query.where("name", "array_contains", name.lower().title())
 
     if date is not None:
         try:
