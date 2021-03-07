@@ -14,6 +14,21 @@ default_app = initialize_app(cred)
 db = firestore.client()
 ach_ref = db.collection('achievements')
 
+
+class Achievement():
+    def __init__(self, data):
+        self.data = data
+
+    def to_response(self):
+        """
+        Returns a dictionary sanitized for jsonifying
+        """
+        response = self.data.copy()
+        # the name field is actually an array of keywords so we want only the full name
+        response[u'name'] = response[u'name'][0]
+        return response
+
+
 @app.route('/achievements', methods=['GET'])
 def get_achievements():
     """
@@ -47,11 +62,8 @@ def get_achievements():
             query = query.where("date", ">=", int(start_date))   
         if end_date is not None:
             query = query.where("date", "<=", int(end_date))     
-
-
-    results = [doc.to_dict() for doc in query.stream()]
-    for result in results:
-        result[u'name'] = result[u'name'][0]
+    
+    results = [Achievement(doc.to_dict()).to_response() for doc in query.stream()]
 
     return jsonify(results), 200
 
@@ -62,7 +74,7 @@ def get_achievements_by_id(id):
     if doc is None:
         return jsonify(error=400, message="No achievement exists with that id"), 400
     else:
-        return jsonify(doc), 200
+        return jsonify(Achievement(doc).to_response()), 200
     
 
 port = int(os.environ.get('PORT', 8080))
