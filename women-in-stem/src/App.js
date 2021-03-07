@@ -1,6 +1,7 @@
 import './App.css';
 import Carousel from './components/Carousel'
 import styled from 'styled-components'
+import {motion} from 'framer-motion'
 
 
 function App() {
@@ -16,10 +17,12 @@ function App() {
           <h1>
             Today we celebrate the achievements of these women 🎉
           </h1>
-          <DateContainer>
-            <span>
+          <DateContainer >
+            <motion.span initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}>
             {date}
-            </span>
+            </motion.span>
           </DateContainer>
         </NavbarContainer>
         <Main>
