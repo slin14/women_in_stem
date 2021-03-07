@@ -129,7 +129,7 @@ code {
     border-radius: 15px;
     max-height: calc(100vh - 80px); }
   .image-gallery-content.left .image-gallery-slide .image-gallery-image, .image-gallery-content.right .image-gallery-slide .image-gallery-image {
-    max-height: 100vh; }
+    max-height: 70vh; }
 
 .image-gallery-slide-wrapper {
   position: relative; }
@@ -148,6 +148,12 @@ code {
   position: relative;
   white-space: nowrap;
   text-align: center; }
+
+div.image-gallery-slide>img {
+    width:200;
+    height:150;
+    overflow:hidden;
+}
 
 .image-gallery-slide {
   left: 15%;

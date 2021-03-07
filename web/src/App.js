@@ -1,22 +1,26 @@
 import './App.css';
-import Carousel from './components/Carousel'
-import styled from 'styled-components'
-import {motion} from 'framer-motion'
-import SearchContainer from './components/SearchContainer'
+import Carousel from './components/Carousel';
+import styled from 'styled-components';
+import {motion} from 'framer-motion';
+import SearchContainer from './components/SearchContainer';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import Details from './Details';
 
 function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/details/:id" render={(props) => (
+            <Details {...props}/>
+          )}></Route>
         </Switch>
     </Router>
   );
@@ -31,9 +35,20 @@ function Home() {
   const today = new Date();
   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+  const callApi = () => {
+    fetch('http://localhost:5000/achievements').then(
+      function(response) {
+        console.log(response);
+        response.json().then(function(data) {
+          console.log(data);
+        });
+      }
+    ).catch(function(err) {
+      console.log('Error calling API')
+    });
+  }
 
   return (
-    
     <div className="App">
       <Container>
         <NavbarContainer>
