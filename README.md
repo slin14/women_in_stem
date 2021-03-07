@@ -18,3 +18,9 @@ Now, cd into the `web/` directory and run `npm install`.
 To run the API, in your console in the root of this project, type `flask run`.
 
 To run the web client, cd into `web/` and run `npm start`.
+
+## Usage
+
+To get data from the API, create a `GET` request at route `/achievements`. You may also define additional query parameters such as `date`, `name`, `start_date`, `end_date`, and more!
+
+Our web client interfaces with our API! Go to `http://localhost:5000` to see it in action!
