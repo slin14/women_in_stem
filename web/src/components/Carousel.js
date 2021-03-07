@@ -13,6 +13,7 @@ class Carousel extends React.Component {
                 {
                     original: 'https://picsum.photos/id/1018/1000/600/',
                     thumbnail: 'https://picsum.photos/id/1018/250/150/',
+
                 },
                 {
                     original: 'https://picsum.photos/id/1015/1000/600/',
@@ -37,6 +38,8 @@ class Carousel extends React.Component {
                 achievementCards.push({
                     original: point.image_url,
                     thumbnail: point.image_url,
+                    height: 200,
+                    width: 50,
                     achievementCard: achievementCard
                 });
             });
