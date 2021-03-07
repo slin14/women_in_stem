@@ -1,35 +1,30 @@
 import React from "react";
 
-class Details extends React.Component {
+export default class Details extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            achievement: null,
+            achievement: undefined,
         };
     }
 
-    componenDidMount() {
+    componentDidMount() {
         fetch(`http://localhost:5000/achievements/${this.props.match.params.id}`).then(
-            function(response) {
-                console.log(response);
-                response.json().then(function(data) {
-                    console.log(data);
-                    this.setState({
-                        achievement: data
-                    });
-                });
-            }
-        ).catch(function(err) {
-            console.log('Error calling API')
-        });
+            (response) => response.json().then((data)=>{
+                console.log(data);
+                this.setState({achievement: data});
+            })
+        );
     }
 
     render() {
+        const {achievement} = this.state;
+        if (!achievement) {
+            return <p>loading...</p>
+        } else {
         return (
-            <p>{this.state.achievement.description}</p>
+            <p>{achievement.name}</p>
         );
+        }
     }
 }
-
-export default Details;
