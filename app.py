@@ -1,5 +1,5 @@
 # Required imports
-import os
+import os, datetime
 from flask import Flask, request, jsonify
 from firebase_admin import credentials, firestore, initialize_app
 
@@ -21,18 +21,29 @@ def get_achievements():
     """
     id = request.args.get("id")
     name = request.args.get("name")
+    date = request.args.get("date")
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+
+    query = ach_ref
 
     if id is not None:
         return jsonify(ach_ref.document(id).get().to_dict()), 200
 
     if name is not None:
-        docs = ach_ref.where("name", "==", name).stream()
+        query = query.where("name", "==", name)
 
-        results = [doc.to_dict() for doc in docs]
+    if date is not None:
+        try:
+            date_object = datetime.datetime.strptime(date, "%Y%m%d").date()
+            query = query.where("year", "==", date_object.year).where("month", "==", date_object.month).where("day", "==", date_object.day)
 
-        return jsonify(results), 200
+        except:
+            return jsonify(error=400, message="Invalid date! Please format date as yyyymmdd"), 400
 
-    return jsonify(error=400, message="Invalid query parameters passed!"), 400
+
+    results = [doc.to_dict() for doc in query.stream()]
+    return jsonify(results), 200
     
 
 port = int(os.environ.get('PORT', 8080))
