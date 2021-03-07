@@ -24,10 +24,7 @@ function Carousel() {
         <div>
             <Container>
                 <ImageContainer>
-
-                </ImageContainer>
-                <ImageContainer>
-                    <ImageGallery items={images} />
+                    <ImageGallery items={images} showFullscreenButton={false}/>
                 </ImageContainer>
                 <ImageContainer></ImageContainer>
             </Container>
@@ -38,15 +35,10 @@ function Carousel() {
 export default Carousel
 
 const Container = styled.div`
-    // display: grid;
-    // grid-template-rows: 64px auto min-content; 
 
 `
 
 const ImageContainer = styled.div`
-    // height: 70%;
-    // width: 70%;
-    // display: flex;
-    // justify-content: right;
-    // align-items: bottom;
+
+
 `

@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Container>
         <NavbarContainer>
-          
+
         </NavbarContainer>
         <Main>
           <Carousel />
@@ -24,7 +24,7 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-rows: 38px auto;
+  grid-template-rows: 60px auto;
 `
 const Main = styled.div`
   display:flex;
