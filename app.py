@@ -48,6 +48,8 @@ def get_achievements():
 
 
     results = [doc.to_dict() for doc in query.stream()]
+    results.sort()
+    results[0][u'name'] = results[0][u'name'][0]
     return jsonify(results), 200
     
 
