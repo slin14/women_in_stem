@@ -25,13 +25,12 @@ export default SearchContainer
 
 
 const Container = styled.div`
-    // background:linear-gradient(45deg, #350d36, #ef5350);
     color: white;
     display:flex;
     align-items: center;
     justify-content: center; 
     position: relative;
-    margin-top: 10px;
+    margin-top: 20px;
     // spread the item as far as possible from each other^
 
 
@@ -52,7 +51,7 @@ const SearchContain = styled.div`
 
 const Search = styled.div`
     width: 100%;
-    box-shadow: inset 0 0 0 1px rgb(188, 171, 188);
+    box-shadow: inset 0 0 0 1px white;
     border-radius: 6px;
     display: flex;
     align-items:center;

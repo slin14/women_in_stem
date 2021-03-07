@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+<<<<<<< HEAD
   return (
     <Router>
         <Switch>
@@ -24,12 +25,18 @@ function App() {
 
 
 function Home() {
+=======
+  const Log = () => {
+    console.log("I clicked on the date")
+  }
+>>>>>>> 56b35d9a34b134a2eb80cba36c31b270486c5e51
 
   const today = new Date();
   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
 
   return (
+    
     <div className="App">
       <Container>
         <NavbarContainer>
@@ -37,7 +44,7 @@ function Home() {
           <h1>
             Today we celebrate the achievements of these women 🎉
           </h1>
-          <DateContainer >
+          <DateContainer onClick={Log}>
             <motion.span initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1 }}>
