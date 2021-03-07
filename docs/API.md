@@ -25,6 +25,7 @@ Example response:
          "year": "year of achievement as integer",
          "month": "month of achievement as integer",
          "day": "day of achievement as int",
+         "date": "yyyymmdd", // some achievements will not have a month or day, for which they will default to values 01
          "category": "Science, Technology, Engineering, or Math",
          "description": "some paragraphs describing achievement",
          "image_url": "url link to person's image",
