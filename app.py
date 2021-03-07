@@ -40,6 +40,11 @@ def get_achievements():
 
         except:
             return jsonify(error=400, message="Invalid date! Please format date as yyyymmdd"), 400
+    else:
+        if start_date is not None:
+            query = query.where("date", ">=", int(start_date))   
+        if end_date is not None:
+            query = query.where("date", "<=", int(end_date))     
 
 
     results = [doc.to_dict() for doc in query.stream()]
