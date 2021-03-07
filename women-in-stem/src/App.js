@@ -2,6 +2,7 @@ import './App.css';
 import Carousel from './components/Carousel'
 import styled from 'styled-components'
 import {motion} from 'framer-motion'
+import SearchContainer from './components/SearchContainer'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <div className="App">
       <Container>
         <NavbarContainer>
+          <SearchContainer/>
           <h1>
             Today we celebrate the achievements of these women 🎉
           </h1>
