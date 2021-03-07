@@ -3,9 +3,27 @@ import Carousel from './components/Carousel'
 import styled from 'styled-components'
 import {motion} from 'framer-motion'
 import SearchContainer from './components/SearchContainer'
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
+  return (
+    <Router>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+    </Router>
+  );
+}
+
+
+function Home() {
 
   const today = new Date();
   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
