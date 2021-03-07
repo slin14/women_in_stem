@@ -16,8 +16,9 @@ ach_ref = db.collection('achievements')
 
 
 class Achievement():
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, document):
+        self.data = document.to_dict()
+        self.id = document.id
 
     def to_response(self):
         """
@@ -26,6 +27,7 @@ class Achievement():
         response = self.data.copy()
         # the name field is actually an array of keywords so we want only the full name
         response[u'name'] = response[u'name'][0]
+        response[u'id'] = self.id
         return response
 
 
@@ -63,13 +65,13 @@ def get_achievements():
         if end_date is not None:
             query = query.where("date", "<=", int(end_date))     
     
-    results = [Achievement(doc.to_dict()).to_response() for doc in query.stream()]
+    results = [Achievement(doc).to_response() for doc in query.stream()]
 
     return jsonify(results), 200
 
 @app.route("/achievements/<id>", methods=["GET"])
 def get_achievements_by_id(id):
-    doc = ach_ref.document(id).get().to_dict()
+    doc = ach_ref.document(id).get()
 
     if doc is None:
         return jsonify(error=400, message="No achievement exists with that id"), 400
