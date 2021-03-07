@@ -19,15 +19,20 @@ def get_achievements():
         Ensure you pass a custom ID as part of json body in post request,
         e.g. json={'id': '1', 'title': 'Write a blog post'}
     """
+    id = request.args.get("id")
     name = request.args.get("name")
-    docs = ach_ref.where("name", "==", name).stream()
 
-    results = []
+    if id is not None:
+        return jsonify(ach_ref.document(id).get().to_dict()), 200
 
-    for doc in docs:
-        results.append(doc.to_dict())
+    if name is not None:
+        docs = ach_ref.where("name", "==", name).stream()
 
-    return jsonify(results), 200
+        results = [doc.to_dict() for doc in docs]
+
+        return jsonify(results), 200
+
+    return jsonify(error=400, message="Invalid query parameters passed!"), 400
     
 
 port = int(os.environ.get('PORT', 8080))
