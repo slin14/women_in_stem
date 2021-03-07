@@ -1,10 +1,12 @@
 # Required imports
 import os, datetime
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from firebase_admin import credentials, firestore, initialize_app
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Initialize Firestore DB
 cred = credentials.Certificate('key.json')
@@ -48,8 +50,9 @@ def get_achievements():
 
 
     results = [doc.to_dict() for doc in query.stream()]
-    results.sort()
-    results[0][u'name'] = results[0][u'name'][0]
+    for result in results:
+        result[u'name'] = result[u'name'][0]
+
     return jsonify(results), 200
     
 

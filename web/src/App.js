@@ -1,8 +1,8 @@
 import './App.css';
-import Carousel from './components/Carousel'
-import styled from 'styled-components'
-import {motion} from 'framer-motion'
-import SearchContainer from './components/SearchContainer'
+import Carousel from './components/Carousel';
+import styled from 'styled-components';
+import {motion} from 'framer-motion';
+import SearchContainer from './components/SearchContainer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,6 +31,18 @@ function Home() {
   const today = new Date();
   const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+  const callApi = () => {
+    fetch('http://localhost:5000/achievements').then(
+      function(response) {
+        console.log(response);
+        response.json().then(function(data) {
+          console.log(data);
+        });
+      }
+    ).catch(function(err) {
+      console.log('Error calling API')
+    });
+  }
 
   return (
     
@@ -41,6 +53,7 @@ function Home() {
           <h1>
             Today we celebrate the achievements of these women 🎉
           </h1>
+          <button onClick={callApi}>test</button>
           <DateContainer onClick={Log}>
             <motion.span initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
