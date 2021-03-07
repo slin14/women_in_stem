@@ -9,14 +9,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Details from './Details';
 
 function App() {
   return (
     <Router>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/details/:id" render={(props) => (
+            <Details {...props}/>
+          )}></Route>
         </Switch>
     </Router>
   );
@@ -45,7 +49,6 @@ function Home() {
   }
 
   return (
-    
     <div className="App">
       <Container>
         <NavbarContainer>
@@ -53,7 +56,6 @@ function Home() {
           <h1>
             Today we celebrate the achievements of these women 🎉
           </h1>
-          <button onClick={callApi}>test</button>
           <DateContainer onClick={Log}>
             <motion.span initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
